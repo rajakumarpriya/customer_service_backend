@@ -9,8 +9,9 @@ import com.login.app.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+	
 	Optional<User> findByFirstName(String username);
-
+	Optional<User> findById(Long id);
 	Boolean existsByFirstName(String username);
 
 	Boolean existsByEmailAddress(String email);

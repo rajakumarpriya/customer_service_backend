@@ -57,18 +57,6 @@ public class User {
 	@Size(max = 20) //mobile number
 	private String contactPreference;
 	
-	@NotBlank
-	@Size(max = 120)
-	private String rolesval;
-	
-	
-
-	public void setRolesVal(String rolesval) {
-		this.rolesval = rolesval;
-	}
-	public String getRolesVal() {
-		return rolesval;
-	}
 
 	@NotBlank
 	@Size(max = 120)
@@ -85,7 +73,7 @@ public class User {
 
 	public  User(String firstName, String lastName, String address, 
 			String state, String country, String emailAddress, String pan, String contactNo
-			, String contactPreference, String password,String rolesval) {
+			, String contactPreference, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -96,7 +84,6 @@ public class User {
 		this.contactNo = contactNo;
 		this.contactPreference = contactPreference;
 		this.password = password;
-		this.rolesval=rolesval;
 	}
 
 	

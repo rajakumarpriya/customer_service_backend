@@ -3,6 +3,7 @@ package com.login.app.controllers;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -84,7 +86,7 @@ public class AuthController {
 				signUpRequest.getState(),signUpRequest.getCountry(),signUpRequest.getEmailAddress(),
 				signUpRequest.getPan(),signUpRequest.getContactNo(),signUpRequest.getContactPreference(),
 				 //signUpRequest.getEmail(),
-				 encoder.encode(signUpRequest.getPassword()),signUpRequest.getRolesVal());
+				 encoder.encode(signUpRequest.getPassword()));
 		
 		//state;country;emailAddress;pan;contactNocontactPreference;password;
 
@@ -108,7 +110,7 @@ public class AuthController {
 //					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 //			roles.add(userRole);
 //		} else {
-			String strRolesval = signUpRequest.getRolesVal();
+			String strRolesval = "admin";
 			
 			//strRoles.forEach(role -> {
 				switch (strRolesval) {
@@ -154,6 +156,11 @@ public class AuthController {
 												 roles));
 	}
 	
+	 @GetMapping("/searchtitle/{status}")
+	    public Optional<User> findByIdSearch(@PathVariable Long status) throws Exception{
+	        return service.getSearchByupdate(status);
+	    }
+	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updateCustomerInfo(@PathVariable int id,@RequestBody SignupRequest requsets) {
     	
@@ -167,12 +174,12 @@ public class AuthController {
 		String panval =requsets.getPan();
 		String contactval =requsets.getContactNo();
 		String contactpreval =requsets.getContactPreference();
-		String passwordval =encoder.encode(requsets.getPassword());
+		//String passwordval =encoder.encode(requsets.getPassword());
 		String emailval=requsets.getEmailAddress();
 				 //signUpRequest.getEmail(),
 		//String fir_name =requsets.getRolesVal();
 		return new ResponseEntity<String>(service.updateCustomerInfo(fir_name,las_name,add, state_val, country_val,
-				panval,contactval,contactpreval,id,passwordval,emailval), HttpStatus.OK);
+				panval,contactval,contactpreval,id,emailval), HttpStatus.OK);
 	}
 
 }

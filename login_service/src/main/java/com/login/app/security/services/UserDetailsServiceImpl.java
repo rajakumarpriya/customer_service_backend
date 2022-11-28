@@ -28,9 +28,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return UserDetailsImpl.build(user);
 	}
 	
+	 
 	//return new ResponseEntity<String>(service.updateCustomerInfo(), HttpStatus.OK);
 	public String updateCustomerInfo(String fir_name,String las_name, String add, String state_val, String country_val,
-			String panval,String contactval,String contactpreval,long id,String passwordval,String emailval) {
+			String panval,String contactval,String contactpreval,long id,String emailval) {
 		Optional<User> req=userRepository.findById(id);
 		User data=req.get();
 		data.setFirstName(fir_name);
@@ -42,10 +43,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		data.setContactNo(contactval);
 		data.setContactPreference(contactpreval);
 		data.setEmailAddress(data.getEmailAddress());
-		data.setPassword(data.getPassword());
+		//data.setPassword(data.getPassword());
 		
 		
 		return userRepository.save(data).getId()+"Data Updated";
 	}
+
+	public Optional<User> getSearchByupdate(Long status) {
+		// TODO Auto-generated method stub
+		return userRepository.findById(status);
+	}
+//	public Optional<User> getSearchByupdate(Long status){
+//    	return userRepository.findById(status);
+//        //return optional;
+//    }
 
 }

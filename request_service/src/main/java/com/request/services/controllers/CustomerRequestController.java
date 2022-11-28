@@ -1,5 +1,6 @@
 package com.request.services.controllers;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +53,7 @@ public class CustomerRequestController {
     }
 
     @PostMapping("/save")
-    public CustomerRequest saveServiceRequest(@RequestBody CustomerRequest requsets){
+    public CustomerRequest saveServiceRequest(@RequestBody CustomerRequest requsets) throws ParseException{
         return service.saveServiceRequest(requsets);
     }
 

@@ -55,19 +55,11 @@ public class SignupRequest {
 	@Size(max = 20) //mobile number
 	private String contactPreference;
 	
-	@NotBlank
-	@Size(max = 20) //mobile number
-	private String rolesval;
+//	
 
 	
     
-    public String getRolesVal() {
-		return rolesval;
-	}
-
-	public void setRolesVal(String rolesval) {
-		this.rolesval = rolesval;
-	}
+   
 
 	private Set<String> role;
 	//private Set<CustomerRole> customerroles = new HashSet<>();

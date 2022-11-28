@@ -1,5 +1,8 @@
 package com.request.services.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +19,8 @@ public class CustomerRequsetService {
     private CustomerRequestRepository repo;
     
     public List<CustomerRequest> getAllRequests(){
-        return repo.findAll();
+         return repo.findAll();
+        // return repo.findAll().get(0)
     }
 
     public Optional<CustomerRequest> getSearchByupdate(int status){
@@ -76,7 +80,22 @@ public class CustomerRequsetService {
 //        }
     }
 
-    public CustomerRequest saveServiceRequest(CustomerRequest requsets){
+    public CustomerRequest saveServiceRequest(CustomerRequest requsets) throws ParseException{
+    	String pattern = "yyyy-MM-dd";
+    	String date1=requsets.getCompletedDate();
+    	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+    	//String date = simpleDateFormat.format(date1);
+    	
+    	String dateStr = "20190226";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = sdf.parse(date1);
+        sdf = new SimpleDateFormat("yyyy-MM-dd");
+        dateStr = sdf.format(date);
+    	System.out.println(date);
+    	System.out.println(dateStr);
+    	requsets.setCompletedDate(dateStr);
+    	
         return repo.save(requsets);
     }
 
@@ -111,6 +130,7 @@ public class CustomerRequsetService {
 		CustomerRequest data=req.get();
 		data.setComments(comments);
 		data.setStatus(status);
+		System.out.println(completedDate+"completedDate");
 		data.setCompletedDate(completedDate);
 		data.setDescription(description);
 		
